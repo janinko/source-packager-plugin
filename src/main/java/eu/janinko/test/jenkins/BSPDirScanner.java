@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
-import java.util.Arrays;
 import java.util.HashSet;
 
 /**
@@ -30,9 +29,18 @@ public class BSPDirScanner extends DirScanner{
 		ignore = new HashSet<String>();
 		ignoreall = new HashSet<String>();
 		
-		ignore.addAll(Arrays.asList(BSPBuildWrapper.DESCRIPTOR.ignore.split("\n")));
-		ignoreall.addAll(Arrays.asList(BSPBuildWrapper.DESCRIPTOR.ignoreall.split("\n")));
-		ignore.addAll(Arrays.asList(BSPBuildWrapper.DESCRIPTOR.ignorelists.split("\n")));
+		for(String s : BSPBuildWrapper.DESCRIPTOR.ignore.split("\n")){
+			while(s.endsWith("/")){ s = s.substring(0,s.length()-1);}
+			ignore.add(s);
+		}
+		for(String s : BSPBuildWrapper.DESCRIPTOR.ignoreall.split("\n")){
+			while(s.endsWith("/")){ s = s.substring(0,s.length()-1);}
+			ignoreall.add(s);
+		}
+		for(String s : BSPBuildWrapper.DESCRIPTOR.ignorelists.split("\n")){
+			while(s.endsWith("/")){ s = s.substring(0,s.length()-1);}
+			ignore.add(s);
+		}
 		
 		ignore.add(BSPBuildWrapper.COMMANDFILE);
 		ignore.add(BSPBuildWrapper.SOURCESFILE);
