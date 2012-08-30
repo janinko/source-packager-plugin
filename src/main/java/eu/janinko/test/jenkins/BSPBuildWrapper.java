@@ -112,6 +112,18 @@ public class BSPBuildWrapper extends BuildWrapper {
             save();
             return super.configure(req,formData);
         }
+
+		public String getIgnore() {
+			return ignore;
+		}
+
+		public String getIgnoreall() {
+			return ignoreall;
+		}
+
+		public String getIgnorelists() {
+			return ignorelists;
+		}
     }
 
 	
